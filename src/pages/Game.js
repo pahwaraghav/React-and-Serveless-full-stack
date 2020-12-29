@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import {
   StyledGame,
@@ -10,17 +10,21 @@ import {
 import { Strong } from "../styled/Common";
 
 export default function Game({ history }) {
+  const MAX_SECONDS = 30;
+  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  const [currentCharacter, setCurrentCharacter] = useState("");
   const [score, setScore] = useState(0);
-  const MAX_SECONDS = 5;
   const [ms, setMs] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
+    setRandomCharacter();
     const currentTime = new Date();
     const interval = setInterval(() => updateTime(currentTime), 1);
     return () => clearInterval(interval);
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateTime = (startTime) => {
     const endTime = new Date();
     const msPassedStr = (endTime.getTime() - startTime.getTime()).toString();
@@ -48,14 +52,40 @@ export default function Game({ history }) {
     if (seconds <= -1) {
       history.push("/gameOver");
     }
-  }, [seconds, ms]);
+  }, [seconds, ms, history]);
+
+  const keyUpHandler = useCallback(
+    (e) => {
+      if (e.key === currentCharacter) {
+        setScore((prevScore) => prevScore + 1);
+      } else {
+        if (score > 0) {
+          setScore((prevScore) => prevScore - 1);
+        }
+      }
+      setRandomCharacter();
+    },
+    [currentCharacter, score]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keyup", keyUpHandler);
+    return () => {
+      document.removeEventListener("keyup", keyUpHandler);
+    };
+  }, [keyUpHandler]);
+
+  const setRandomCharacter = () => {
+    const randomInt = Math.floor(Math.random() * 36);
+    setCurrentCharacter(characters[randomInt]);
+  };
 
   return (
     <StyledGame>
       <StyledScore>
         Score:<Strong>{score}</Strong>
       </StyledScore>
-      <StyledCharacter>A</StyledCharacter>
+      <StyledCharacter>{currentCharacter}</StyledCharacter>
       <StyledTimer>
         Time:{" "}
         <Strong>
