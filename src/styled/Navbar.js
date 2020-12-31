@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 
 export const StyledNavbar = styled.nav`
   display: grid;
-  grid-template-columns: 1fr auto;
+  @media (min-width: 601px) {
+    grid-template-columns: 1fr auto;
+  }
+  @media (max-width: 600px) {
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 1.5rem;
+  }
   padding: 20px;
 `;
 
@@ -35,4 +41,12 @@ export const StyledLink = styled(Link)`
 
 export const StyledButton = styled.button`
   border: none;
+  background: inherit;
+  font-size: 1.1rem;
+  padding: 0;
+  cursor: pointer;
+  transition: color 200ms;
+  &:hover {
+    color: #e16365;
+  }
 `;
