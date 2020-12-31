@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { StyledTitle } from "../styled/Common";
 import { ScoresList, ScoreLi } from "../styled/HighScores";
 
 export default function HighScores() {
@@ -8,8 +8,8 @@ export default function HighScores() {
     const loadHighScores = async () => {
       try {
         const res = await fetch("/.netlify/functions/getHighScores");
-        const scores = await res.json();
-        setHighScores(scores);
+        const resJSON = await res.json();
+        setHighScores(resJSON);
       } catch (err) {
         console.error(err);
       }
@@ -18,11 +18,11 @@ export default function HighScores() {
   }, []);
   return (
     <div>
-      <h1>HIgh Scores</h1>
+      <StyledTitle>High Scores</StyledTitle>
       <ScoresList>
-        {scores.map((score) => (
+        {scores.map((score, index) => (
           <ScoreLi key={score.id}>
-            {score.fields.name} - {score.fields.score}
+            {index + 1}. {score.fields.name} - {score.fields.score}
           </ScoreLi>
         ))}
       </ScoresList>
