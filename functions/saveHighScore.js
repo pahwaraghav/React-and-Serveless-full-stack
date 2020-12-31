@@ -1,4 +1,4 @@
-const { table, getHighScores } = require("./util/airtable");
+const { table, getHighScores } = require("./util/Airtable");
 const {
   getAccessTokenFromHeaders,
   validateAccessToken,
