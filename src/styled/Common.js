@@ -5,6 +5,7 @@ export const Accent = styled.span`
 `;
 
 export const StyledTitle = styled.h1`
+  font-family: sans-serif;
   font-size: 4rem;
   text-align: center;
   margin-bottom: 2rem;

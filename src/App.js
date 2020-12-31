@@ -9,13 +9,14 @@ import Navbar from "./components/Navbar";
 import Global from "./styled/Global";
 import { Container } from "./styled/container";
 import { Main } from "./styled/Main";
+import { StyledTitle } from "./styled/Common";
 
 import { useAuth0 } from "./auth";
 
 function App() {
   const { loading } = useAuth0();
   if (loading) {
-    return <p>Loading...</p>;
+    return <StyledTitle>Loading...</StyledTitle>;
   }
   return (
     <Router>

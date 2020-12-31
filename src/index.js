@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import { ScoreProvider } from "./context/ScoreContext";
 import { Auth0Provider } from "./auth";
