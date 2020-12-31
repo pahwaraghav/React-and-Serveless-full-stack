@@ -10,7 +10,13 @@ import Global from "./styled/Global";
 import { Container } from "./styled/container";
 import { Main } from "./styled/Main";
 
+import { useAuth0 } from "./auth";
+
 function App() {
+  const { loading } = useAuth0();
+  if (loading) {
+    return <p>Loading...</p>;
+  }
   return (
     <Router>
       <Main>
