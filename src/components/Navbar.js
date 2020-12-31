@@ -5,6 +5,7 @@ import {
   StyledNavBrand,
   StyledNavItems,
   StyledLink,
+  StyledButton,
 } from "../styled/Navbar";
 import { Accent } from "../styled/Common";
 import { useAuth0 } from "../auth";
@@ -26,12 +27,12 @@ export default function Navbar() {
         </li>
         {!isAuthenticated && (
           <li>
-            <button onClick={loginWithRedirect}>Login</button>
+            <StyledButton onClick={loginWithRedirect}>Login</StyledButton>
           </li>
         )}
         {isAuthenticated && (
           <li>
-            <button onClick={logout}>Logout</button>
+            <StyledButton onClick={logout}>Logout</StyledButton>
           </li>
         )}
       </StyledNavItems>

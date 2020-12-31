@@ -32,3 +32,7 @@ export const StyledLink = styled(Link)`
     color: #e16365;
   }
 `;
+
+export const StyledButton = styled.button`
+  border: none;
+`;
