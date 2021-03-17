@@ -94,7 +94,7 @@ export default function Game({ history }) {
   };
 
   const onChange = (event) => {
-    setCurrentString(event.target.value);
+    setCurrentString(event.target.value.toLowerCase());
   };
 
   return (

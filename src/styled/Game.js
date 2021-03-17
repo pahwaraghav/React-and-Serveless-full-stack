@@ -26,7 +26,7 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledCharacter = styled.p`
-  font-size: 15vw;
+  font-size: 14vw;
   word-break: break;
   grid-row: 2;
   grid-column: 1/4;
