@@ -24,7 +24,7 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledCharacter = styled.p`
-  font-size: 15rem;
+  font-size: 10rem;
   grid-row: 2;
   grid-column: 1/4;
   text-align: center;
