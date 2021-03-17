@@ -20,11 +20,14 @@ export const StyledTimer = styled.p`
 export const StyledInput = styled.input`
   position: fixed;
   bottom: 20px;
-  left: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
 `;
 
 export const StyledCharacter = styled.p`
-  font-size: 10rem;
+  font-size: 15vw;
+  word-break: break;
   grid-row: 2;
   grid-column: 1/4;
   text-align: center;
