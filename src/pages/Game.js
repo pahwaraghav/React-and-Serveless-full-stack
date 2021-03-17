@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useCallback } from "react";
-
+import { commonWords } from "../utils/wordsArray";
 import {
   StyledGame,
   StyledScore,
   StyledTimer,
   StyledCharacter,
+  StyledInput,
 } from "../styled/Game";
 
 import { Strong } from "../styled/Common";
 import { useScore } from "../context/ScoreContext";
 
 export default function Game({ history }) {
-  const MAX_SECONDS = 10;
-  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
-  const [currentCharacter, setCurrentCharacter] = useState("");
+  const MAX_SECONDS = 60;
+  //const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  const [currentString, setCurrentString] = useState("");
   const [score, setScore] = useScore(0);
+  const [desiredString, setDesiredString] = useState("");
   const [ms, setMs] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
@@ -58,16 +60,25 @@ export default function Game({ history }) {
 
   const keyUpHandler = useCallback(
     (e) => {
-      if (e.key === currentCharacter) {
-        setScore((prevScore) => prevScore + 1);
-      } else {
+      if (e.key === "Escape") {
         if (score > 0) {
           setScore((prevScore) => prevScore - 1);
         }
+        setRandomCharacter();
+        setCurrentString("");
+      } else if (desiredString === currentString) {
+        setScore((prevScore) => prevScore + 1);
+        setRandomCharacter();
+        setCurrentString("");
       }
-      setRandomCharacter();
+      // } else {
+      //   if (score > 0) {
+      //     setScore((prevScore) => prevScore - 1);
+      //   }
+      // }
+      console.log(currentString);
     },
-    [currentCharacter, score]
+    [currentString, score]
   );
 
   useEffect(() => {
@@ -78,8 +89,12 @@ export default function Game({ history }) {
   }, [keyUpHandler]);
 
   const setRandomCharacter = () => {
-    const randomInt = Math.floor(Math.random() * 36);
-    setCurrentCharacter(characters[randomInt]);
+    const randomInt = Math.floor(Math.random() * commonWords.length);
+    setDesiredString(commonWords[randomInt]);
+  };
+
+  const onChange = (event) => {
+    setCurrentString(event.target.value);
   };
 
   return (
@@ -87,9 +102,14 @@ export default function Game({ history }) {
       <StyledScore>
         Score:<Strong>{score}</Strong>
       </StyledScore>
-      <StyledCharacter>{currentCharacter}</StyledCharacter>
+      <StyledCharacter>{desiredString}</StyledCharacter>
       <StyledTimer>
         Time:{" "}
+        <StyledInput
+          autoFocus
+          value={currentString}
+          onChange={onChange}
+        ></StyledInput>
         <Strong>
           {seconds}: {ms}
         </Strong>

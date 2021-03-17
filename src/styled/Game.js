@@ -17,6 +17,12 @@ export const StyledTimer = styled.p`
   grid-column: 3;
 `;
 
+export const StyledInput = styled.input`
+  position: fixed;
+  bottom: 20px;
+  left: 45%;
+`;
+
 export const StyledCharacter = styled.p`
   font-size: 15rem;
   grid-row: 2;
